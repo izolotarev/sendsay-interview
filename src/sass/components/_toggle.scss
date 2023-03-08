@@ -1,0 +1,63 @@
+.toggle {
+   border:none;
+   appearance:none;  
+   display:inline-flex;
+   justify-content: space-around;
+   flex-wrap:nowrap;
+   align-items:center;
+   
+   * {
+      flex: 0 1 100%;
+   }
+  
+   input[type=radio] {
+      appearance:none;
+   }
+  
+   input[type=radio]:checked {  
+      appearance:none;
+   }
+  
+   input[type=radio] + label {  
+     display: block;
+     padding: 1px;
+     background: $color-toggle-bg;
+     border-radius: 6px;
+
+      .toggle__container {
+        display: flex;
+        align-items: center;
+        padding: 8px 12px ;    
+        cursor:pointer;
+        @extend %transition;
+      }
+
+      .toggle__container .toggle__text {
+         margin-left: 8px;
+      }
+   } 
+   
+   input[type=radio]:checked + label {  
+      .toggle__container {
+         background: $color-white;
+         border-radius: 5px;
+         box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+
+         .icon-mode path {
+            stroke: $color-violet;
+         }
+      }
+   } 
+   
+   input[type=radio].toggle__first + label { 
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right:none;
+   }
+  
+   input[type=radio].toggle__second + label { 
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left:none;
+   }
+}

@@ -1,0 +1,46 @@
+.constructor {
+   padding: 38px 0 54px 0;
+}
+
+.constructor__toggle {
+   display: flex;
+   justify-content: end;
+
+   @include font(1.4rem, 1.5rem, 300);
+   color: $color-toggle;
+
+   padding-bottom: 30px;
+}
+
+.constructor__wrapper {
+   display: flex;
+   justify-content: space-between;
+}
+
+.constructor__drag-area {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+
+   border: 2px dashed $color-stroke;
+   border-radius: 6px;
+
+   width: 243px;
+   height: 480px;
+}
+
+.constructor__drag-here-img {
+   margin-bottom: 12px;
+}
+
+.constructor__drag-area-title {
+   @include font(1.4rem, 1.7rem, 500);
+   color: $color-violet;
+
+   margin-bottom: 4px;
+}
+
+.constructor__drag-area-title-sec {
+   @include font(1.2rem, 1.5rem, 400);
+}
