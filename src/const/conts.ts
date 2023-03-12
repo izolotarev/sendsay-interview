@@ -1,8 +1,9 @@
 export enum ActionType {
   SetCurrentElement = 'BOARDS/SET_CURRENT_ELEMENT',
   SetCurrentBoard = 'BOARDS/SET_CURRENT_BOARD',
-  MoveElement = 'BOARDS/MOVE_ELEMENT',
-  ChangePosition = 'BOARDS/CHANGE_POSITION',
+  MoveElementToAnotherBoard = 'BOARDS/MOVE_ELEMENT_TO_ANOTHER_BOARD',
+  MoveElementInsideTheBoard = 'BOARDS/MOVE_ELEMENT_INSIDE_THE_BOARD',
+  RemoveElement = 'BOARDS/REMOVE_ELEMENT',
   RedirectToRoute = 'USER/REDIRECT',
 }
 

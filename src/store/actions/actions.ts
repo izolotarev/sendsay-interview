@@ -22,7 +22,7 @@ export const setCurrentBoardAction = createAction(
 );
 
 export const moveElementToAnotherBoardAction = createAction(
-  ActionType.MoveElement,
+  ActionType.MoveElementToAnotherBoard,
   (elem: CalcElementType, indexTo) => ({
     payload: {
       elem,
@@ -32,13 +32,22 @@ export const moveElementToAnotherBoardAction = createAction(
 )
 
 export const moveElementInsideTheBoardAction = createAction(
-  ActionType.ChangePosition,
+  ActionType.MoveElementInsideTheBoard,
   (elem: CalcElementType, indexFrom: number, indexTo: number, removeFromSource: boolean) => ({
     payload: {
       elem,
       indexFrom,
       indexTo,
       removeFromSource,
+    }
+  })
+)
+
+export const removeElementAction = createAction(
+  ActionType.RemoveElement,
+  (index: number) => ({
+    payload: {
+      index,
     }
   })
 )

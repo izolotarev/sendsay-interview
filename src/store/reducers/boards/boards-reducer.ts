@@ -1,6 +1,6 @@
 import { Board, BoardsState, CalcElement } from '../../../types/types';
 import { createReducer } from '@reduxjs/toolkit';
-import { moveElementInsideTheBoardAction, moveElementToAnotherBoardAction, setCurrentBoardAction, setCurrentElementAction } from '../../actions/actions';
+import { moveElementInsideTheBoardAction, moveElementToAnotherBoardAction, removeElementAction, setCurrentBoardAction, setCurrentElementAction } from '../../actions/actions';
 
 export const initialState: BoardsState = {
   boards: [
@@ -54,4 +54,7 @@ export const boardsData = createReducer(initialState, (builder) => {
       }
       items.splice(indexTo + 1, 0, elem);
     })
+    .addCase(removeElementAction, (state, action) => {
+      state.boards[1].items.splice(action.payload.index, 1);
+    });
 });

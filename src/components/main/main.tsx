@@ -1,28 +1,12 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getBoards } from '../../store/reducers/boards/boards-selectors';
-import { Board, BoardType } from '../../types/types';
 import Calculator from '../calculator/calculator';
 import DragArea from '../drag-area/drag-area';
 
-
-
 function Main() {
-
   const [checked, setChecked] = useState(true)
-
   const boards = useSelector(getBoards);
-
-  // const [boards, setBoards] = useState<BoardType[]>([
-  //   {
-  //     name: Board.Left, 
-  //     items: [ElementType.Display, ElementType.Operations, ElementType.Digits, ElementType.Equal]
-  //   },
-  //   {
-  //     name: Board.Right,
-  //     items: []
-  //   }
-  // ]);
 
   const handleChecked = () => {
     setChecked(!checked);

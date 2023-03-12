@@ -1,7 +1,8 @@
+import { SyntheticEvent } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useAppDispatch } from '../../hooks/hooks';
-import { moveElementInsideTheBoardAction, moveElementToAnotherBoardAction, setCurrentBoardAction, setCurrentElementAction } from '../../store/actions/actions';
+import { moveElementInsideTheBoardAction, moveElementToAnotherBoardAction, removeElementAction, setCurrentBoardAction, setCurrentElementAction } from '../../store/actions/actions';
 import { getCurBoard, getCurElement } from '../../store/reducers/boards/boards-selectors';
 import { Board, BoardType, CalcElement, CalcElementType } from '../../types/types';
 
@@ -16,7 +17,7 @@ function Calculator({ elements, board }: CalculatorProps): JSX.Element {
   const curElement = useSelector(getCurElement);
   const curBoard = useSelector(getCurBoard);
 
-  const handleDragOver = (evt: React.DragEvent, board: BoardType, elem: CalcElementType) => {
+  const handleDragOver = (evt: React.DragEvent) => {
     evt.preventDefault();
   
     if (evt.target instanceof HTMLElement && evt.target.parentElement?.classList.contains('calculator__card')) {
@@ -24,7 +25,7 @@ function Calculator({ elements, board }: CalculatorProps): JSX.Element {
     }
   }
 
-  const handleDragLeave = (evt: React.DragEvent, board: BoardType, elem: CalcElementType) => {
+  const handleDragLeave = (evt: React.DragEvent) => {
     if (evt.target instanceof HTMLElement && evt.target.parentElement?.classList.contains('calculator__card')) {
       evt.target.parentElement.classList.remove('calculator__card_highlighted');
     }
@@ -64,6 +65,11 @@ function Calculator({ elements, board }: CalculatorProps): JSX.Element {
     
   }
 
+  const handleRemove = (evt: SyntheticEvent, elem: CalcElementType, board: BoardType) => {
+    const index = board.items.indexOf(elem);
+    dispatch(removeElementAction(index));
+  }
+
   return (
     <div className="calculator calculator__wrapper">
       {
@@ -75,10 +81,11 @@ function Calculator({ elements, board }: CalculatorProps): JSX.Element {
                 <div 
                   className={`calculator__display-container calculator__card ${elem.active ? '' : 'calculator__card_not-active'}`}
                   draggable
-                  onDragOver={(evt) => handleDragOver(evt, board, elem)}
-                  onDragLeave={(evt) => handleDragLeave(evt, board, elem)}
+                  onDragOver={(evt) => handleDragOver(evt)}
+                  onDragLeave={(evt) => handleDragLeave(evt)}
                   onDragStart={(evt) => handleDragStart(evt, board, elem)}
                   onDrop={(evt) => handleDrop(evt, board, elem)}
+                  onDoubleClick={(evt) => handleRemove(evt, elem, board)}
                   key={`${board.type} ${elem.type}`}
                 >
                   <div className="calculator__display">0</div>
@@ -89,10 +96,11 @@ function Calculator({ elements, board }: CalculatorProps): JSX.Element {
                 <div 
                   className={`calculator__operation-list calculator__card ${elem.active ? '' : 'calculator__card_not-active'}`}
                   draggable
-                  onDragOver={(evt) => handleDragOver(evt, board, elem)}
-                  onDragLeave={(evt) => handleDragLeave(evt, board, elem)}
+                  onDragOver={(evt) => handleDragOver(evt)}
+                  onDragLeave={(evt) => handleDragLeave(evt)}
                   onDragStart={(evt) => handleDragStart(evt, board, elem)}
                   onDrop={(evt) => handleDrop(evt, board, elem)}
+                  onDoubleClick={(evt) => handleRemove(evt, elem, board)}
                   key={`${board.type} ${elem.type}`}
                 >
                   <button className="calculator__button">/</button>
@@ -106,10 +114,11 @@ function Calculator({ elements, board }: CalculatorProps): JSX.Element {
                 <div 
                   className={`calculator__digits calculator__card ${elem.active ? '' : 'calculator__card_not-active'}`} 
                   draggable
-                  onDragOver={(evt) => handleDragOver(evt, board, elem)}
-                  onDragLeave={(evt) => handleDragLeave(evt, board, elem)}
+                  onDragOver={(evt) => handleDragOver(evt)}
+                  onDragLeave={(evt) => handleDragLeave(evt)}
                   onDragStart={(evt) => handleDragStart(evt, board, elem)}
                   onDrop={(evt) => handleDrop(evt, board, elem)}
+                  onDoubleClick={(evt) => handleRemove(evt, elem, board)}
                   key={`${board.type} ${elem.type}`}
                 >
                   <button className="calculator__button">7</button>
@@ -130,10 +139,11 @@ function Calculator({ elements, board }: CalculatorProps): JSX.Element {
                 <div 
                   className={`calculator__card calculator__equal ${elem.active ? '' : 'calculator__card_not-active'}`} 
                   draggable
-                  onDragOver={(evt) => handleDragOver(evt, board, elem)}
-                  onDragLeave={(evt) => handleDragLeave(evt, board, elem)}
+                  onDragOver={(evt) => handleDragOver(evt)}
+                  onDragLeave={(evt) => handleDragLeave(evt)}
                   onDragStart={(evt) => handleDragStart(evt, board, elem)}
                   onDrop={(evt) => handleDrop(evt, board, elem)}
+                  onDoubleClick={(evt) => handleRemove(evt, elem, board)}
                   key={`${board.type} ${elem.type}`}
                 >
                   <button className="calculator__button">=</button>
