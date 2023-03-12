@@ -1,10 +1,12 @@
 export enum ActionType {
-  LoadSpeakers = 'SPEAKERS/LOAD_SPEAKERS',
+  SetCurrentElement = 'BOARDS/SET_CURRENT_ELEMENT',
+  SetCurrentBoard = 'BOARDS/SET_CURRENT_BOARD',
+  MoveElement = 'BOARDS/MOVE_ELEMENT',
+  ChangePosition = 'BOARDS/CHANGE_POSITION',
   RedirectToRoute = 'USER/REDIRECT',
 }
 
 export const APIRoute = {
-  SPEAKERS: 'api/tz/speakers',
 }
 
 export const AppRoute = {

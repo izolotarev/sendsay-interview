@@ -3,16 +3,29 @@
     &__wrapper {
       width: 240px;
     }
+    //calculator__card
     &__card {
       padding: 4px;
       border-radius: 6px;
       box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+      margin-bottom: 12px;
+      position: relative;
+
+      &_not-active {
+        opacity: 0.5;
+      }
+
+      &_highlighted::after {
+        content: "";
+        bottom:-6px;
+        left: -12px;
+        position: absolute;
+        height: 1px;
+        width: 110%;
+        background-color: $color-violet;
+      }
     }
 
-		// .calculator__display-container
-		&__display-container {
-      margin-bottom: 12px;
-    }
     //caluclator__display
     &__display {
       display: flex;
@@ -29,8 +42,6 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       column-gap: 8px;
-
-      margin-bottom: 12px;
     }
 		// .calculator__button
 		&__button {
@@ -60,8 +71,6 @@
       grid-column-gap: 8px;
       grid-row-gap: 8px;
 
-      margin-bottom: 12px;
-
       button:nth-child(10) {
         grid-column: 1 / span 2;
       }
@@ -69,6 +78,9 @@
 		// .calculator__equal
 		&__equal {
       button {
+        background-color: $color-violet;
+        color: $color-white;
+
         height: 64px;
         width: 100%;
       }

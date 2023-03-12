@@ -11,9 +11,25 @@ export enum Board {
   Right
 }
 
-export enum Element {
+export enum CalcElement {
   Display = 1,
   Operations,
   Digits,
-  Equal,
+  Equal
+}
+
+export type CalcElementType = {
+  type: CalcElement,
+  active: boolean,
+}
+
+export type BoardType = {
+  type: Board,
+  items: CalcElementType[]
+}
+
+export type BoardsState = {
+  boards: BoardType[],
+  currentElement?: CalcElementType,
+  currentBoard?: BoardType,
 }
