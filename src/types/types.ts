@@ -33,3 +33,9 @@ export type BoardsState = {
   currentElement?: CalcElementType,
   currentBoard?: BoardType,
 }
+
+export type CalculatorState = {
+  previousOperand?: string;
+  currentOperand?: string;
+  operation?: string;
+}

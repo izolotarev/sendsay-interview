@@ -51,3 +51,25 @@ export const removeElementAction = createAction(
     }
   })
 )
+
+export const addDigitAction = createAction(
+  ActionType.AddDigit,
+  (digit: string) => ({
+    payload: {
+      digit
+    }
+  })
+)
+
+export const chooseOperationAction = createAction(
+  ActionType.ChooseOperation,
+  (operation: string) => ({
+    payload: {
+      operation
+    }
+  })
+)
+
+export const calculateAction = createAction(
+  ActionType.Calculate
+)

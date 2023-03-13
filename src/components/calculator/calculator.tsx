@@ -4,7 +4,11 @@ import { toast } from 'react-toastify';
 import { useAppDispatch } from '../../hooks/hooks';
 import { moveElementInsideTheBoardAction, moveElementToAnotherBoardAction, removeElementAction, setCurrentBoardAction, setCurrentElementAction } from '../../store/actions/actions';
 import { getCurBoard, getCurElement } from '../../store/reducers/boards/boards-selectors';
+import { getCurrentOperand } from '../../store/reducers/calculator/calculator-selectors';
 import { Board, BoardType, CalcElement, CalcElementType } from '../../types/types';
+import DigitButton from '../digit-button/digit-button';
+import EqualButton from '../equal-button/equal-button';
+import OperationButton from '../operation-button/operation-button';
 
 type CalculatorProps = {
   elements: CalcElementType[],
@@ -16,6 +20,7 @@ function Calculator({ elements, board }: CalculatorProps): JSX.Element {
   const dispatch = useAppDispatch();
   const curElement = useSelector(getCurElement);
   const curBoard = useSelector(getCurBoard);
+  const currentOperand = useSelector(getCurrentOperand);
 
   const handleDragOver = (evt: React.DragEvent) => {
     evt.preventDefault();
@@ -88,7 +93,7 @@ function Calculator({ elements, board }: CalculatorProps): JSX.Element {
                   onDoubleClick={(evt) => handleRemove(evt, elem, board)}
                   key={`${board.type} ${elem.type}`}
                 >
-                  <div className="calculator__display">0</div>
+                  <div className="calculator__display">{currentOperand || "0"}</div>
                 </div>
               );
             case CalcElement.Operations:
@@ -103,10 +108,10 @@ function Calculator({ elements, board }: CalculatorProps): JSX.Element {
                   onDoubleClick={(evt) => handleRemove(evt, elem, board)}
                   key={`${board.type} ${elem.type}`}
                 >
-                  <button className="calculator__button">/</button>
-                  <button className="calculator__button">X</button>
-                  <button className="calculator__button">-</button>
-                  <button className="calculator__button">+</button>
+                  <OperationButton operation="/"/>
+                  <OperationButton operation="X"/>
+                  <OperationButton operation="-"/>
+                  <OperationButton operation="+"/>
                 </div>
               );
             case CalcElement.Digits:
@@ -121,17 +126,17 @@ function Calculator({ elements, board }: CalculatorProps): JSX.Element {
                   onDoubleClick={(evt) => handleRemove(evt, elem, board)}
                   key={`${board.type} ${elem.type}`}
                 >
-                  <button className="calculator__button">7</button>
-                  <button className="calculator__button">8</button>
-                  <button className="calculator__button">9</button>
-                  <button className="calculator__button">4</button>
-                  <button className="calculator__button">5</button>
-                  <button className="calculator__button">6</button>
-                  <button className="calculator__button">1</button>
-                  <button className="calculator__button">2</button>
-                  <button className="calculator__button">3</button>
-                  <button className="calculator__button">0</button>
-                  <button className="calculator__button">,</button>
+                  <DigitButton digit="7"/>
+                  <DigitButton digit="8"/>
+                  <DigitButton digit="9"/>
+                  <DigitButton digit="4"/>
+                  <DigitButton digit="5"/>
+                  <DigitButton digit="6"/>
+                  <DigitButton digit="1"/>
+                  <DigitButton digit="2"/>
+                  <DigitButton digit="3"/>
+                  <DigitButton digit="0"/>
+                  <DigitButton digit=","/>
                 </div>
               );
             case CalcElement.Equal:
@@ -146,7 +151,7 @@ function Calculator({ elements, board }: CalculatorProps): JSX.Element {
                   onDoubleClick={(evt) => handleRemove(evt, elem, board)}
                   key={`${board.type} ${elem.type}`}
                 >
-                  <button className="calculator__button">=</button>
+                  <EqualButton />
                 </div>
               );
           }

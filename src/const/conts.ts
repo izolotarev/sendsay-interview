@@ -4,6 +4,9 @@ export enum ActionType {
   MoveElementToAnotherBoard = 'BOARDS/MOVE_ELEMENT_TO_ANOTHER_BOARD',
   MoveElementInsideTheBoard = 'BOARDS/MOVE_ELEMENT_INSIDE_THE_BOARD',
   RemoveElement = 'BOARDS/REMOVE_ELEMENT',
+  AddDigit = 'CALCULATOR/ADD_DIGIT',
+  ChooseOperation = 'CALCULATOR/CHOOSE_OPERATION',
+  Calculate = 'CALCULATOR/CALCULATE',
   RedirectToRoute = 'USER/REDIRECT',
 }
 
