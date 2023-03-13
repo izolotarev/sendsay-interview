@@ -7,6 +7,7 @@ export enum ActionType {
   AddDigit = 'CALCULATOR/ADD_DIGIT',
   ChooseOperation = 'CALCULATOR/CHOOSE_OPERATION',
   Calculate = 'CALCULATOR/CALCULATE',
+  ChangeAppMode = 'BOARDS/CHANGE_APP_MODE',
   RedirectToRoute = 'USER/REDIRECT',
 }
 

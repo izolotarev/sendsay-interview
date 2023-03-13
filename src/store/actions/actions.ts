@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { ActionType } from '../../const/conts';
-import { BoardType, CalcElementType } from '../../types/types';
+import { AppMode, BoardType, CalcElementType } from '../../types/types';
 
 
 export const setCurrentElementAction = createAction(
@@ -72,4 +72,13 @@ export const chooseOperationAction = createAction(
 
 export const calculateAction = createAction(
   ActionType.Calculate
+)
+
+export const changeAppModeAction = createAction(
+  ActionType.ChangeAppMode,
+  (mode: AppMode) => ({
+    payload: {
+      mode
+    }
+  })
 )

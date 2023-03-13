@@ -1,6 +1,6 @@
-import { Board, BoardsState, CalcElement } from '../../../types/types';
+import { AppMode, Board, BoardsState, CalcElement } from '../../../types/types';
 import { createReducer } from '@reduxjs/toolkit';
-import { moveElementInsideTheBoardAction, moveElementToAnotherBoardAction, removeElementAction, setCurrentBoardAction, setCurrentElementAction } from '../../actions/actions';
+import { changeAppModeAction, moveElementInsideTheBoardAction, moveElementToAnotherBoardAction, removeElementAction, setCurrentBoardAction, setCurrentElementAction } from '../../actions/actions';
 
 export const initialState: BoardsState = {
   boards: [
@@ -20,6 +20,7 @@ export const initialState: BoardsState = {
   ],
   currentElement: undefined,
   currentBoard: undefined,
+  appMode: AppMode.Constructor,
 }
 
 export const boardsData = createReducer(initialState, (builder) => {
@@ -56,5 +57,8 @@ export const boardsData = createReducer(initialState, (builder) => {
     })
     .addCase(removeElementAction, (state, action) => {
       state.boards[1].items.splice(action.payload.index, 1);
+    })
+    .addCase(changeAppModeAction, (state, action) => {
+      state.appMode = action.payload.mode; 
     });
 });

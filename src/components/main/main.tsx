@@ -1,15 +1,26 @@
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../../hooks/hooks';
+import { changeAppModeAction } from '../../store/actions/actions';
 import { getBoards } from '../../store/reducers/boards/boards-selectors';
+import { AppMode } from '../../types/types';
 import Calculator from '../calculator/calculator';
 import DragArea from '../drag-area/drag-area';
 
 function Main() {
-  const [checked, setChecked] = useState(true)
   const boards = useSelector(getBoards);
+  const dispatch = useAppDispatch();
 
-  const handleChecked = () => {
-    setChecked(!checked);
+  const handleChangeAppMode = (evt: React.SyntheticEvent) => {
+    if (evt.target instanceof HTMLInputElement) {
+      switch (evt.target.value) {
+        case 'runtime':
+          dispatch(changeAppModeAction(AppMode.Runtime));
+          break;
+        case 'constructor':
+          dispatch(changeAppModeAction(AppMode.Constructor));
+          break;
+      }
+    }
   }
 
   return (
@@ -17,7 +28,7 @@ function Main() {
       <div className="wrapper">
         <div className="constructor__toggle">
           <fieldset className="toggle">  
-            <input className="toggle__first" type="radio" id="toggle-off" name="toggle" value=""  onChange={handleChecked} />
+            <input className="toggle__first" type="radio" id="toggle-off" name="toggle" value="runtime"  onChange={handleChangeAppMode} />
             <label htmlFor="toggle-off">
               <div className="toggle__container">
                 <svg className="icon-mode" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -28,7 +39,7 @@ function Main() {
               </div>
             </label>
             
-            <input className="toggle__second" type="radio" id="toggle-on" name="toggle" value="" defaultChecked onChange={handleChecked}/>
+            <input className="toggle__second" type="radio" id="toggle-on" name="toggle" value="constructor" defaultChecked onChange={handleChangeAppMode}/>
             <label htmlFor="toggle-on">
               <div className="toggle__container">
                 <svg className="icon-mode"  width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

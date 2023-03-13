@@ -18,6 +18,11 @@ export enum CalcElement {
   Equal
 }
 
+export enum AppMode {
+  Constructor,
+  Runtime
+}
+
 export type CalcElementType = {
   type: CalcElement,
   active: boolean,
@@ -32,6 +37,7 @@ export type BoardsState = {
   boards: BoardType[],
   currentElement?: CalcElementType,
   currentBoard?: BoardType,
+  appMode: AppMode,
 }
 
 export type CalculatorState = {
@@ -39,3 +45,4 @@ export type CalculatorState = {
   currentOperand?: string;
   operation?: string;
 }
+
