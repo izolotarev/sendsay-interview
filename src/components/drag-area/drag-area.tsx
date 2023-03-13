@@ -2,8 +2,8 @@ import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useAppDispatch } from '../../hooks/hooks';
 import { moveElementToAnotherBoardAction } from '../../store/actions/actions';
-import { getBoards, getCurElement } from '../../store/reducers/boards/boards-selectors';
-import { CalcElement } from '../../types/types';
+import { getAppMode, getBoards, getCurElement } from '../../store/reducers/boards/boards-selectors';
+import { AppMode, CalcElement } from '../../types/types';
 
 
 function DragArea(): JSX.Element {
@@ -11,6 +11,7 @@ function DragArea(): JSX.Element {
   const curElement = useSelector(getCurElement);
   const dispatch = useAppDispatch();
   const boards = useSelector(getBoards);
+  const appMode = useSelector(getAppMode);
 
   const handleDragOver = (evt: React.DragEvent) => {
     evt.preventDefault();
@@ -30,6 +31,12 @@ function DragArea(): JSX.Element {
     if (evt.target instanceof HTMLElement && evt.target.className === 'constructor__drag-area') {
       evt.target.style.backgroundColor = '#ffffff';
     }
+
+    if (appMode !== AppMode.Constructor) {
+      toast.info("The application is in Runtime mode! Please switch to Constructor");
+      return;
+    }
+
     if (!curElement || !curElement.active) { return }
     if (boards[1].items.length === 0 && curElement.type !== CalcElement.Display) { 
       toast.info("Display must be the first element!");
