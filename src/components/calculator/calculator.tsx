@@ -141,7 +141,7 @@ function Calculator({ elements, board }: CalculatorProps): JSX.Element {
                   <CalculatorButton sign="2" type={CalcButton.Digit}/>
                   <CalculatorButton sign="3" type={CalcButton.Digit}/>
                   <CalculatorButton sign="0" type={CalcButton.Digit}/>
-                  <CalculatorButton sign="," type={CalcButton.Digit}/>
+                  <CalculatorButton sign="." type={CalcButton.Digit}/>
                 </div>
               );
             case CalcElement.Equal:
