@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useAppDispatch } from '../../hooks/hooks';
 import { moveElementInsideTheBoardAction, moveElementToAnotherBoardAction, removeElementAction, setCurrentBoardAction, setCurrentElementAction } from '../../store/actions/actions';
-import { getCurBoard, getCurElement } from '../../store/reducers/boards/boards-selectors';
+import { getAppMode, getCurBoard, getCurElement } from '../../store/reducers/boards/boards-selectors';
 import { getCurrentOperand } from '../../store/reducers/calculator/calculator-selectors';
-import { Board, BoardType, CalcButton, CalcElement, CalcElementType } from '../../types/types';
+import { AppMode, Board, BoardType, CalcButton, CalcElement, CalcElementType } from '../../types/types';
 import CalculatorButton from '../calculator-button/calculator-button';
 
 type CalculatorProps = {
@@ -19,6 +19,7 @@ function Calculator({ elements, board }: CalculatorProps): JSX.Element {
   const curElement = useSelector(getCurElement);
   const curBoard = useSelector(getCurBoard);
   const currentOperand = useSelector(getCurrentOperand);
+  const appMode = useSelector(getAppMode);
 
   const handleDragOver = (evt: React.DragEvent) => {
     evt.preventDefault();
@@ -34,15 +35,21 @@ function Calculator({ elements, board }: CalculatorProps): JSX.Element {
     }
   }
 
-  const handleDragStart = (evt: React.DragEvent, board: BoardType, elem: CalcElementType) => {    
+  const handleDragStart = (evt: React.DragEvent, board: BoardType, elem: CalcElementType) => {       
     dispatch(setCurrentElementAction(elem));
     dispatch(setCurrentBoardAction(board));
   }
 
   const handleDrop = (evt: React.DragEvent, board: BoardType, elem: CalcElementType) => {
     evt.preventDefault();
+
     if (evt.target instanceof HTMLElement && evt.target.parentElement?.classList.contains('calculator__card')) {
       evt.target.parentElement.classList.remove('calculator__card_highlighted');
+    }
+
+    if (appMode !== AppMode.Constructor) {
+      toast.info("The application is in Runtime mode! Please switch to Constructor");
+      return;
     }
 
     if (!curElement || !curElement.active) { return; }
