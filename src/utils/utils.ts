@@ -23,5 +23,5 @@ export const calculate = ({ currentOperand, previousOperand, operation }: Calcul
       break;
   }
 
-  return result?.toString();
+  return result?.toFixed(5).toString();
 }
