@@ -23,6 +23,12 @@ export enum AppMode {
   Runtime
 }
 
+export enum CalcButton {
+  Operation,
+  Digit,
+  Equal
+}
+
 export type CalcElementType = {
   type: CalcElement,
   active: boolean,

@@ -5,10 +5,8 @@ import { useAppDispatch } from '../../hooks/hooks';
 import { moveElementInsideTheBoardAction, moveElementToAnotherBoardAction, removeElementAction, setCurrentBoardAction, setCurrentElementAction } from '../../store/actions/actions';
 import { getCurBoard, getCurElement } from '../../store/reducers/boards/boards-selectors';
 import { getCurrentOperand } from '../../store/reducers/calculator/calculator-selectors';
-import { Board, BoardType, CalcElement, CalcElementType } from '../../types/types';
-import DigitButton from '../digit-button/digit-button';
-import EqualButton from '../equal-button/equal-button';
-import OperationButton from '../operation-button/operation-button';
+import { Board, BoardType, CalcButton, CalcElement, CalcElementType } from '../../types/types';
+import CalculatorButton from '../calculator-button/calculator-button';
 
 type CalculatorProps = {
   elements: CalcElementType[],
@@ -108,10 +106,10 @@ function Calculator({ elements, board }: CalculatorProps): JSX.Element {
                   onDoubleClick={(evt) => handleRemove(evt, elem, board)}
                   key={`${board.type} ${elem.type}`}
                 >
-                  <OperationButton operation="/"/>
-                  <OperationButton operation="X"/>
-                  <OperationButton operation="-"/>
-                  <OperationButton operation="+"/>
+                  <CalculatorButton sign="/" type={CalcButton.Operation}/>
+                  <CalculatorButton sign="X" type={CalcButton.Operation}/>
+                  <CalculatorButton sign="-" type={CalcButton.Operation}/>
+                  <CalculatorButton sign="+" type={CalcButton.Operation}/>
                 </div>
               );
             case CalcElement.Digits:
@@ -126,17 +124,17 @@ function Calculator({ elements, board }: CalculatorProps): JSX.Element {
                   onDoubleClick={(evt) => handleRemove(evt, elem, board)}
                   key={`${board.type} ${elem.type}`}
                 >
-                  <DigitButton digit="7"/>
-                  <DigitButton digit="8"/>
-                  <DigitButton digit="9"/>
-                  <DigitButton digit="4"/>
-                  <DigitButton digit="5"/>
-                  <DigitButton digit="6"/>
-                  <DigitButton digit="1"/>
-                  <DigitButton digit="2"/>
-                  <DigitButton digit="3"/>
-                  <DigitButton digit="0"/>
-                  <DigitButton digit=","/>
+                  <CalculatorButton sign="7" type={CalcButton.Digit}/>
+                  <CalculatorButton sign="8" type={CalcButton.Digit}/>
+                  <CalculatorButton sign="9" type={CalcButton.Digit}/>
+                  <CalculatorButton sign="4" type={CalcButton.Digit}/>
+                  <CalculatorButton sign="5" type={CalcButton.Digit}/>
+                  <CalculatorButton sign="6" type={CalcButton.Digit}/>
+                  <CalculatorButton sign="1" type={CalcButton.Digit}/>
+                  <CalculatorButton sign="2" type={CalcButton.Digit}/>
+                  <CalculatorButton sign="3" type={CalcButton.Digit}/>
+                  <CalculatorButton sign="0" type={CalcButton.Digit}/>
+                  <CalculatorButton sign="," type={CalcButton.Digit}/>
                 </div>
               );
             case CalcElement.Equal:
@@ -151,7 +149,7 @@ function Calculator({ elements, board }: CalculatorProps): JSX.Element {
                   onDoubleClick={(evt) => handleRemove(evt, elem, board)}
                   key={`${board.type} ${elem.type}`}
                 >
-                  <EqualButton />
+                  <CalculatorButton sign="=" type={CalcButton.Equal}/>
                 </div>
               );
           }
